@@ -4,7 +4,8 @@ import houseController from "../controller/houseController";
 const houseRouter = Router();
 houseRouter.delete('/:id', houseController.deleteHouse);
 houseRouter.get('/', houseController.findAll);
-houseRouter.put('/:id', houseController.updateHouse);
-houseRouter.post('/', houseController.postHouse);
+houseRouter.get('/:id', houseController.findById);
+houseRouter.put('/:id', houseController.update);
+houseRouter.post('/', houseController.createHouse);
 
 export default houseRouter;

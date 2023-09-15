@@ -9,10 +9,7 @@ class UserController {
     }
     getAllUser = async (req: Request, res: Response) => {
         let user='';   
-        if(req.query.id){
-            user = await this.userService.findById(req.query.id)
-        }
-        else if(req.query.role) {
+        if(req.query.role) {
             user = await this.userService.getUser(req.query.role)
         }
         else{
@@ -46,10 +43,10 @@ class UserController {
 
         }
     }
-    // findById = async (req: Request, res: Response) => {
-    //     let  user= await userService.findById(req.params.id)
-    //     res.json(user);
-    // }
+    findById = async (req: Request, res: Response) => {
+        let  user= await userService.findById(req.params.id)
+        res.json(user);
+    }
     update = async (req: Request, res: Response) => {
         let result = await this.userService.update(req.params.id, req.body);
         res.json("sửa thành công")

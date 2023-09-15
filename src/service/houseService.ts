@@ -8,11 +8,11 @@ class HouseService {
         this.Repository = AppDataSource.getRepository(House);
     }
 
-    postHouse = async (data) => {
+    createHouse = async (data) => {
         return await this.Repository.save(data)
     }
 
-    updateHouse =async (id, data) => {
+    update =async (id, data) => {
         return await this.Repository.update(id,data)
     }
     deleteHouse =async (id) => {

@@ -9,10 +9,7 @@ class HouseController {
     }
     findAll = async (req: Request, res: Response) => {
         let house='';   
-        if(req.query.id) {
-            house = await this.houseService.findById(req.query.id)
-        }
-        else if(req.query.name) {
+        if(req.query.name) {
             house = await this.houseService.findByName(req.query.name)
         }
         else if(req.query.status) {
@@ -23,12 +20,16 @@ class HouseController {
         }
         res.json(house);
     }
-    postHouse = async (req: Request, res: Response) => {
-        let house = await this.houseService.postHouse(req.body);
-        res.json("dang nha thanh cong")
+    findById = async (req: Request, res: Response) => {
+        let  user= await houseService.findById(req.params.id)
+        res.json(user);
     }
-    updateHouse = async (req: Request, res: Response) => {
-        let result = await this.houseService.updateHouse(req.params.id, req.body);
+    createHouse = async (req: Request, res: Response) => {
+        let house = await this.houseService.createHouse(req.body);
+        res.json("them nha thanh cong")
+    }
+    update= async (req: Request, res: Response) => {
+        let result = await this.houseService.update(req.params.id, req.body);
         res.json("sửa thành công")
     }
     deleteHouse = async (req: Request, res: Response) => {
