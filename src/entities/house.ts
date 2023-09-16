@@ -9,14 +9,21 @@ export class House {
     @Column({type: 'varchar'})
     name: string;
 
+    
+    @Column({type: 'varchar'})
+    firstName: string;
+
+    @Column({type: 'varchar'})
+    lastName: string;
+
     @Column({type: 'varchar'})
     address: string;
 
     @Column({type: 'varchar'})
-    numberOfBedrooms: string;
+    numberOfBedrooms: number;
 
     @Column({type: 'varchar'})
-    numberOfBathrooms: string;
+    numberOfBathrooms: number;
 
     @Column({type: 'varchar'})
     description: string;

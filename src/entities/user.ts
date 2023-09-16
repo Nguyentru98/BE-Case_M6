@@ -8,6 +8,15 @@ export class User {
     username: string;
 
     @Column({type: 'varchar'})
+    firstName: string;
+
+    @Column({type: 'varchar'})
+    lastName: string;
+
+    @Column({type: 'varchar'})
+    address: string;
+
+    @Column({type: 'varchar'})
     password: string;
 
     @Column({type: 'varchar'})

@@ -70,6 +70,15 @@ class UserService {
         }
 
     }
+    // totalAmountSpent = async (id)=>{
+    //     return await this.Repository.find({
+    //         select SUM: ["totalMoney"],
+    //         where: { id },
+    //         relations : {
+    //             house : true
+    //         },
+    //     })
+    // }
   
 }
 export default new UserService();
