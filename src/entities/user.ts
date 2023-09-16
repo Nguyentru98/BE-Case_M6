@@ -23,7 +23,7 @@ export class User {
     role: string;
 
     @Column({type: 'varchar'})
-    telephone: string;
+    telephone: number;
 
     @Column({type: 'varchar'})
     avatar: string;

@@ -7,17 +7,17 @@ export class Order {
     @PrimaryGeneratedColumn()
     id: number;
 
-    @Column({type: 'varchar'})
-    rentalTime: string;
+    @Column({type: 'datetime'})
+    rentalTime: number;
 
     @Column({type: 'datetime'})
-    checkIn: string;
+    checkIn: number;
 
     @Column({type: 'datetime'})
-    checkOut: string;
+    checkOut: number;
 
     @Column({type: 'varchar'})
-    totalMoney: string;
+    totalMoney: number;
 
     @Column({type: 'varchar'})
     status: string;

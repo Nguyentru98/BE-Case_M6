@@ -8,7 +8,6 @@ export class House {
 
     @Column({type: 'varchar'})
     name: string;
-
     
     @Column({type: 'varchar'})
     firstName: string;
@@ -29,7 +28,7 @@ export class House {
     description: string;
 
     @Column({type: 'varchar'})
-    price: string;
+    price: number;
 
     @Column({type: 'varchar'})
     avatar: string;
