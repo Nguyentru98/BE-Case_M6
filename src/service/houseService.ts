@@ -44,9 +44,14 @@ class HouseService {
             },
         })
     }
-    findByStatus = async (status)=>{
+    findByStatus = async (status,userId)=>{
         return await this.Repository.find({
-            where: { status },
+            where: { 
+                status,
+                user: {
+                    id: userId
+                }
+            },
             relations : {
                 user : true
             },

@@ -8,12 +8,6 @@ export class House {
 
     @Column({type: 'varchar'})
     name: string;
-    
-    @Column({type: 'varchar'})
-    firstName: string;
-
-    @Column({type: 'varchar'})
-    lastName: string;
 
     @Column({type: 'varchar'})
     address: string;
@@ -35,6 +29,9 @@ export class House {
 
     @Column({type: 'varchar'})
     status: string;
+
+    @Column({type: 'int'})
+    userId: number;
 
     @ManyToOne(() => User, (user) => user.id)
     user: User;

@@ -78,8 +78,7 @@ class UserService {
     //             house : true
     //         },
     //     })
-    // }
-  
+    // } 
 }
 export default new UserService();
 

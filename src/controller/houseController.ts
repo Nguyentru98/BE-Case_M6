@@ -8,12 +8,12 @@ class HouseController {
         this.houseService = houseService;
     }
     findAll = async (req: Request, res: Response) => {
-        let house='';   
+        let house=''; 
         if(req.query.name) {
             house = await this.houseService.findByName(req.query.name)
         }
-        else if(req.query.status) {
-            house = await this.houseService.findByStatus(req.query.status)
+        else if(req.query.status && req.query.userId) {
+            house = await this.houseService.findByStatus(req.query.status, req.query.userId)
         }
         else {
             house = await this.houseService.findByAll()
@@ -29,6 +29,12 @@ class HouseController {
         res.json("them nha thanh cong")
     }
     update= async (req: Request, res: Response) => {
+        let house = await houseService.findById(req.params.id);
+        // validate du lieu
+        if (house.status === 'chothue') {
+            res.status(400).json({'message': 'Khong the chuyen trang thai cua phong dang su dung!'});
+            return;
+        }
         let result = await this.houseService.update(req.params.id, req.body);
         res.json("sửa thành công")
     }
