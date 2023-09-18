@@ -1,3 +1,4 @@
+import { ILike } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { Order } from "../entities/order";
 
@@ -39,7 +40,22 @@ class OrderService {
             },
         })
     }
-
+    findByName = async (name,id)=>{
+        return await this.Repository.find({
+            where: {
+                house:{
+                    name: ILike(`%${name}%`)
+                },
+                user:{
+                    id:id
+                }               
+            },
+            relations : {
+                user : true,
+                house : true
+            },
+        })
+    }
 
 }
 

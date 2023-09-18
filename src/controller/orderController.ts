@@ -8,9 +8,16 @@ class OrderController {
         this.orderSevice = orderSevice;
     }
     findAll = async (req: Request, res: Response) => {
-        let order = await this.orderSevice.findByAll()
-        res.json(order);
+        let order='';
+        if(req.query.name && req.query.id) {
+            order = await this.orderSevice.findByName(req.query.name, req.query.id)
+        }
+        else{
+            order = await this.orderSevice.findByAll()
+        } 
+        res.json(order)
     }
+    
     findById = async (req: Request, res: Response) => {
         let  order= await orderSevice.findById(req.params.id)
         res.json(order);
