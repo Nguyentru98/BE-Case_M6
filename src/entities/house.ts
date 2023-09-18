@@ -37,6 +37,4 @@ export class House {
     @ManyToOne(() => User, (user) => user.id)
     user: User;
 
-    @ManyToOne(() => Picture, (picture) => picture.id)
-    picture: Picture;
 }

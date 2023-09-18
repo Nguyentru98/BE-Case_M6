@@ -12,14 +12,12 @@ class PictureController {
        return(picture)
     }
     findAll = async (req: Request, res: Response) => {
-        let picture='';   
-        if(req.query.id) {
-            picture = await this.pictureService.findById(req.query.id)
-        }
-        else {
-            picture = await this.pictureService.findByAll()
-        }
+        let picture = await this.pictureService.findByAll()
         res.json(picture);
+    }
+    findById =async (req:Request, res:Response) => {
+       let picture = await this.pictureService.findById(req.params.id)
+       res.json(picture);
     }
     update = async (req: Request, res: Response) => {
         let result = await this.pictureService.update(req.params.id, req.body);
@@ -29,5 +27,6 @@ class PictureController {
         let  result = await pictureService.delete(req.params.id)
         res.json('xoa thanh cong');
     }
+
 }
 export default new PictureController();
