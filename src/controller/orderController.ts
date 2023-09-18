@@ -12,6 +12,9 @@ class OrderController {
         if(req.query.name && req.query.id) {
             order = await this.orderSevice.findByName(req.query.name, req.query.id)
         }
+        else if(req.query.startDate,req.query.endDate,req.query.startDate) {
+            order= await orderSevice.findByTime(req.query.startDate,req.query.endDate,req.query.id)
+        }
         else{
             order = await this.orderSevice.findByAll()
         } 
@@ -20,7 +23,16 @@ class OrderController {
     
     findById = async (req: Request, res: Response) => {
         let  order= await orderSevice.findById(req.params.id)
-        res.json(order);
+        let totalMoneySum = 0;
+        
+        for( let i=0; i<order.length ; i++ ) {
+            totalMoneySum += parseInt(order[i].totalMoney);
+        }
+        const response = {
+            ...order,
+            totalMoneySum
+        };
+        res.json(response);
     }
     order = async (req: Request, res: Response) => {
         let order = await this.orderSevice.orderHouse(req.body);

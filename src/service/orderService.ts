@@ -1,4 +1,4 @@
-import { ILike } from "typeorm";
+import { Between, ILike, getConnection} from "typeorm";
 import { AppDataSource } from "../data-source";
 import { Order } from "../entities/order";
 
@@ -18,6 +18,7 @@ class OrderService {
     delete =async (id) => {
         return await this.Repository.delete(id)
     }
+    
     findByAll = async ()=>{
         return await this.Repository.find({
             relations : {
@@ -27,6 +28,7 @@ class OrderService {
             
         })
     }
+    
     findById = async (id)=>{
         return await this.Repository.find({
             where: { 
@@ -40,6 +42,8 @@ class OrderService {
             },
         })
     }
+
+    
     findByName = async (name,id)=>{
         return await this.Repository.find({
             where: {
@@ -56,6 +60,22 @@ class OrderService {
             },
         })
     }
+    findByTime = async (startDate, endDate,id) => {
+  
+          return await this.Repository.find({
+            where: {
+                rentalTime: Between(startDate, endDate),
+                user: {
+                    id: id
+                }
+            },
+            relations: {
+              user: true,
+              house : true
+            },
+          });
+      };
+      
 
 }
 

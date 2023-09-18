@@ -9,8 +9,5 @@ export class Picture {
     @Column({type: 'varchar'})
     picture: string;
 
-    @ManyToOne(() => House, (house) => house.id)
-    house: House;
-
 }
 

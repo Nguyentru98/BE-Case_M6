@@ -1,5 +1,6 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import { User } from "./user";
+import { Picture } from "./picture";
 
 @Entity()
 export class House {
@@ -36,4 +37,6 @@ export class House {
     @ManyToOne(() => User, (user) => user.id)
     user: User;
 
+    @ManyToOne(() => Picture, (picture) => picture.id)
+    picture: Picture;
 }
