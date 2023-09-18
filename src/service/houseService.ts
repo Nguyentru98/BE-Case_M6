@@ -15,7 +15,7 @@ class HouseService {
     update =async (id, data) => {
         return await this.Repository.update(id,data)
     }
-    deleteHouse =async (id) => {
+    delete =async (id) => {
         return await this.Repository.delete(id)
     }
     findByAll = async ()=>{

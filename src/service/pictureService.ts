@@ -10,10 +10,10 @@ class PictureService {
     postPicture = async (data) => {
         return await this.Repository.save(data)
     }
-    updatePicture =async (id, data) => {
+    update =async (id, data) => {
         return await this.Repository.update(id,data)
     }
-    deletePicture =async (id) => {
+    delete =async (id) => {
         return await this.Repository.delete(id)
     }
     findByAll = async ()=>{

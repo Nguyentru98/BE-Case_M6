@@ -21,12 +21,12 @@ class PictureController {
         }
         res.json(picture);
     }
-    updatepicture = async (req: Request, res: Response) => {
-        let result = await this.pictureService.updatePicture(req.params.id, req.body);
+    update = async (req: Request, res: Response) => {
+        let result = await this.pictureService.update(req.params.id, req.body);
         res.json("sửa thành công")
     }
-    deletepicture = async (req: Request, res: Response) => {
-        let  result = await pictureService.deletePicture(req.params.id)
+    delete = async (req: Request, res: Response) => {
+        let  result = await pictureService.delete(req.params.id)
         res.json('xoa thanh cong');
     }
 }

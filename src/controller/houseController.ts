@@ -39,7 +39,7 @@ class HouseController {
         res.json("sửa thành công")
     }
     deleteHouse = async (req: Request, res: Response) => {
-        let  result = await houseService.deleteHouse(req.params.id)
+        let  result = await houseService.delete(req.params.id)
         res.json('xoa thanh cong');
     }
 
