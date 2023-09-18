@@ -32,6 +32,9 @@ export class House {
     status: string;
 
     @Column({type: 'int'})
+    rentals: number;
+
+    @Column({type: 'int'})
     userId: number;
 
     @ManyToOne(() => User, (user) => user.id)

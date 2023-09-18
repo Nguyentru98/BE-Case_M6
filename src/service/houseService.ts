@@ -57,6 +57,13 @@ class HouseService {
             },
         })
     }
+    findBySort = async (sort)=>{
+        return await this.Repository.find({
+            order: {
+                rentals: sort
+              }
+        })
+    }
 
 }
 
