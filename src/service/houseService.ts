@@ -57,11 +57,12 @@ class HouseService {
             },
         })
     }
-    findBySort = async (sort)=>{
+    topRooms  = async (sort)=>{
         return await this.Repository.find({
             order: {
                 rentals: sort
-              }
+              },
+              take: 2
         })
     }
 

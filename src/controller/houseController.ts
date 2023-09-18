@@ -16,7 +16,7 @@ class HouseController {
             house = await this.houseService.findByStatus(req.query.status, req.query.userId)
         }
         else if(req.query.rentals) {
-            house = await this.houseService.findBySort(req.query.rentals)
+            house = await this.houseService.topRooms(req.query.rentals)
         }
         else {
             house = await this.houseService.findByAll()
