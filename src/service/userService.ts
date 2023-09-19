@@ -52,7 +52,7 @@ class UserService {
                     let payload = {
                         idUser: userFind.id,
                         username: userFind.username,
-                        role: 'admin',
+                        role: userFind.role,
                         image : userFind.image
                     }
                     let token = jwt.sign(payload, SECRET, {
@@ -70,15 +70,6 @@ class UserService {
         }
 
     }
-    // totalAmountSpent = async (id)=>{
-    //     return await this.Repository.find({
-    //         select SUM: ["totalMoney"],
-    //         where: { id },
-    //         relations : {
-    //             house : true
-    //         },
-    //     })
-    // } 
 }
 export default new UserService();
 

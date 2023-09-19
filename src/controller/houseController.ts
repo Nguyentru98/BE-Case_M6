@@ -9,14 +9,22 @@ class HouseController {
     }
     findAll = async (req: Request, res: Response) => {
         let house=''; 
-        if(req.query.name) {
-            house = await this.houseService.findByName(req.query.name)
+        let {name, status, userId, rentals, startDate, endDate, checkOut, checkIn} = req.query
+        if(name) {
+            house = await this.houseService.findByName(name)
         }
-        else if(req.query.status && req.query.userId) {
-            house = await this.houseService.findByStatus(req.query.status, req.query.userId)
+        else if(status && userId) {
+            house = await this.houseService.findByStatus(status, userId)
         }
-        else if(req.query.rentals) {
-            house = await this.houseService.topRooms(req.query.rentals)
+        else if(rentals) {
+            house = await this.houseService.topRooms(rentals)
+        }
+        else if(startDate && endDate) {
+            console.log("time")
+            house = await this.houseService.findByTime(startDate,endDate)
+        } 
+        else if (checkOut && checkIn){
+            let data = await this.houseService.findHousetest(checkIn, checkOut)
         }
         else {
             house = await this.houseService.findByAll()
@@ -24,8 +32,8 @@ class HouseController {
         res.json(house);
     }
     findById = async (req: Request, res: Response) => {
-        let  user= await houseService.findById(req.params.id)
-        res.json(user);
+        let  house= await houseService.findById(req.params.id)
+        res.json(house);
     }
     createHouse = async (req: Request, res: Response) => {
         let house = await this.houseService.createHouse(req.body);

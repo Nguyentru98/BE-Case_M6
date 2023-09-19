@@ -70,13 +70,11 @@ class OrderService {
                 }
             },
             relations: {
-              user: true,
               house : true
             },
           });
       };
       
-
 }
 
 export default new OrderService()

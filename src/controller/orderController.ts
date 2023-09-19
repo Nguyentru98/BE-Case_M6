@@ -12,7 +12,7 @@ class OrderController {
         if(req.query.name && req.query.id) {
             order = await this.orderSevice.findByName(req.query.name, req.query.id)
         }
-        else if(req.query.startDate,req.query.endDate,req.query.startDate) {
+        else if(req.query.startDate,req.query.endDate,req.query.id) {
             order= await orderSevice.findByTime(req.query.startDate,req.query.endDate,req.query.id)
         }
         else{

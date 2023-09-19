@@ -1,6 +1,7 @@
-import { ILike } from "typeorm";
+import { Between, ILike } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { House } from "../entities/house";
+
 
 class HouseService {
     private Repository;
@@ -30,7 +31,8 @@ class HouseService {
         return await this.Repository.findOne({
             where: { id },
             relations : {
-                user : true
+                user : true,
+                order: true
             },
         })
     }
@@ -62,10 +64,56 @@ class HouseService {
             order: {
                 rentals: sort
               },
-              take: 2
+              take: 5
         })
     }
+    findByBedroom =async (room) => {
+        return await this.Repository.find({
+            where: {
+                numberOfBedrooms: room
+              },
+        })
+    }
+    findByBathroom =async (room) => {
+        return await this.Repository.find({
+            where: {
+                numberOfBathrooms: room
+              },
+        })
+    }
+    findByAdress =async (room) => {
+        return await this.Repository.find({
+            where: {
+                address: room
+                },
+        })
+    }
+    findByPrice = async (startPrice, endPrice) => {
+        return await this.Repository.find({
+          where: {
+            price: Between(startPrice, endPrice),
+          }
+        });
+    };
 
+    // findByTime = async (startDate, endDate) => {
+    //     return await this.Repository.find({
+    //       where: {
+    //           order: {
+    //             rentalTime: Between(startDate, endDate),
+    //           }
+    //       },
+    //       relations: {
+    //         order: true,
+    //       },
+    //     });
+    // };
+    // findHousetest = async (checkIn, checkOut) => {
+    //     return await this.Repository.createQueryBuilder("house")
+    //         .leftJoinAndSelect("house.order","order")
+    //         .where("house.checkIn BETWEEN (:checkin, :checkout)", {checkin : checkIn}, {})
+    //         .getMany()
+    // }
 }
 
 export default new HouseService()

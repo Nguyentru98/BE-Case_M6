@@ -1,6 +1,7 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
 import { User } from "./user";
 import { Picture } from "./picture";
+import { Order } from "./order";
 
 @Entity()
 export class House {
@@ -26,7 +27,7 @@ export class House {
     price: number;
 
     @Column({type: 'varchar'})
-    avatar: string;
+    defaultImage: string;
 
     @Column({type: 'varchar'})
     status: string;
@@ -36,8 +37,14 @@ export class House {
 
     @Column({type: 'int'})
     userId: number;
+    
+    
+    @Column({type: 'int'})
+    orderId: number;
 
     @ManyToOne(() => User, (user) => user.id)
     user: User;
-
+    
+    @ManyToOne(() => Order, (order) => order.id)
+    order: User;
 }
