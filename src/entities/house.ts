@@ -46,5 +46,5 @@ export class House {
     user: User;
     
     @ManyToOne(() => Order, (order) => order.id)
-    order: User;
+    order: Order;
 }
