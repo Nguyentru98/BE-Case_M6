@@ -13,3 +13,4 @@ export class Picture {
     house: House;
 }
 
+

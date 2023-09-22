@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import { User } from "./user";
 import { Picture } from "./picture";
 import { Order } from "./order";
@@ -26,8 +26,8 @@ export class House {
     @Column({type: 'varchar'})
     price: number;
 
-    @Column({type: 'varchar'})
-    defaultImage: string;
+    // @Column({type: 'longtext', nullable: true})
+    // defaultImage: string;
 
     @Column({type: 'varchar'})
     status: string;
@@ -35,16 +35,18 @@ export class House {
     @Column({type: 'int'})
     rentals: number;
 
-    @Column({type: 'int'})
-    userId: number;
-    
-    
-    @Column({type: 'int'})
-    orderId: number;
+        // @Column({type: 'int'})
+        // userId: number;
 
-    @ManyToOne(() => User, (user) => user.id)
+    // @Column({type: 'int',default: 0 })
+    // orderId: number;
+
+    @ManyToOne(() => User, (userObj) => userObj.id)
     user: User;
     
-    @ManyToOne(() => Order, (order) => order.id)
-    order: Order;
+    @OneToMany(() => Order, (order) => order.house)
+    order: Order[];
+
+    @OneToMany(() => Picture, (picture) => picture.house)
+    picture: Picture[];
 }

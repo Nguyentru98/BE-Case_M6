@@ -32,6 +32,5 @@ class PictureService {
         })
     }
 
-
 }
 export default new PictureService();

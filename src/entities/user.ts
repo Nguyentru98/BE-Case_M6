@@ -1,4 +1,6 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Order} from "./order";
+import {House} from "./house";
 @Entity()
 export class User {
     @PrimaryGeneratedColumn()
@@ -25,7 +27,9 @@ export class User {
     @Column({type: 'varchar'})
     avatar: string;
 
-    @Column({type: 'varchar'})
+    @Column({type: 'varchar', default:"mở khóa"})
     status: string;
-   
+
+    @OneToMany(() => House, (house) => house.user)
+    house: House[];
 }

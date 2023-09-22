@@ -48,7 +48,6 @@ class HouseController {
     //     let data = await this.houseService.findByHouse(req.query);
     //     res.json(data);
     } else {
-      console.log("all");
       house = await this.houseService.findByAll();
     }
     res.json(house);
@@ -58,16 +57,38 @@ class HouseController {
     res.json(house);
   };
   createHouse = async (req: Request, res: Response) => {
-    let house = await this.houseService.createHouse(req.body);
-    res.json("them nha thanh cong");
+    // Tạo một đối tượng nhà với giá trị mặc định cho trường 'status'
+    const newHouseData = {
+      name: req.body.name,
+      address: req.body.address,
+      numberOfBedrooms: req.body.numberOfBedrooms,
+      numberOfBathrooms: req.body.numberOfBathrooms,
+      description: req.body.description,
+      price: req.body.price,
+      status: "Chưa cho thuê", // Đặt giá trị mặc định cho trường 'status'
+      rentals: 0, // Giá trị mặc định cho trường 'rentals'úus
+
+      user : {
+        id :  req.body.userId
+      }
+    };
+    console.log(req.body)
+
+    let house = await this.houseService.createHouse(newHouseData);
+    console.log(house, 111111)
+    res.json(house);
   };
+
   update = async (req: Request, res: Response) => {
+
     let house = await houseService.findById(req.params.id);
     // validate du lieu
     if (house.status === "chothue") {
       res.status(400).json({
+
         message: "Khong the chuyen trang thai cua phong dang su dung!",
       });
+
       return;
     }
     let result = await this.houseService.update(req.params.id, req.body);

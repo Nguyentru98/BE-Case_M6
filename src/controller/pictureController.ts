@@ -8,6 +8,7 @@ class PictureController {
         this.pictureService = pictureService;
     }
     postPicture = async (req:Request , res:Response) =>{
+        console.log(req.body)
        let picture= await pictureService.postPicture(req.body)
        return(picture)
     }

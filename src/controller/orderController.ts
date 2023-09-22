@@ -41,6 +41,7 @@ class OrderController {
     update= async (req: Request, res: Response) => {
         let order = await orderSevice.findById(req.params.id);
         // validate du lieu
+
         if (order.status === 'chothue') {
             res.status(400).json({'message': 'Khong the chuyen trang thai cua phong dang su dung!'});
             return;

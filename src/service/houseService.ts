@@ -8,6 +8,7 @@ class HouseService {
     this.Repository = AppDataSource.getRepository(House);
   }
 
+
   createHouse = async (data) => {
     return await this.Repository.save(data);
   };
@@ -22,6 +23,7 @@ class HouseService {
     return await this.Repository.find({
       relations: {
         user: true,
+        picture: true
       },
     });
   };
@@ -30,7 +32,7 @@ class HouseService {
       where: { id },
       relations: {
         user: true,
-        order: true,
+        picture: true
       },
     });
   };
