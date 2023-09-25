@@ -24,30 +24,32 @@ class HouseController {
       endPrice,
       checkOut,
       checkIn,
-      rentalStartTime,
-      rentalEndTime
     } = req.query;
+    
     if (name) {
       house = await this.houseService.findByName(name);
-    } else if (address) {
+    } 
+    else if (address) {
       house = await this.houseService.findByAdress(address);
-    } else if (startPrice && endPrice) {
+    } 
+    else if (startPrice && endPrice) {
       house = await this.houseService.findByPrice(startPrice, endPrice);
-    } else if (status && id) {
+    } 
+    else if (status && id) {
       house = await this.houseService.findByStatus(status, id);
-    } else if (rentals) {
+    } 
+    else if (rentals) {
       house = await this.houseService.topRooms(rentals);
-    } else if (startDate && endDate) {
+    } 
+    else if (startDate && endDate) {
       console.log("time");
       house = await this.houseService.findByTime(startDate, endDate);
-    } else if (checkOut && checkIn) {
+    } 
+    else if (checkOut && checkIn) {
       let data = await this.houseService.findHousetest(checkIn, checkOut);
       res.json(data);
-    // }else if (req.query) {
-    //   console.log(req.query)
-    //     let data = await this.houseService.findByHouse(req.query);
-    //     res.json(data);
-    } else {
+    } 
+    else {
       console.log("all");
       house = await this.houseService.findByAll();
     }
@@ -58,8 +60,9 @@ class HouseController {
     res.json(house);
   };
   createHouse = async (req: Request, res: Response) => {
+    req.body.rentals = 0;
     let house = await this.houseService.createHouse(req.body);
-    res.json("them nha thanh cong");
+    res.status(200).json(house);
   };
   update = async (req: Request, res: Response) => {
     let house = await houseService.findById(req.params.id);

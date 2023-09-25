@@ -25,7 +25,7 @@ export class User {
     @Column({type: 'varchar'})
     avatar: string;
 
-    @Column({type: 'varchar'})
+    @Column({type: 'varchar', default: "mở khóa"})
     status: string;
    
 }

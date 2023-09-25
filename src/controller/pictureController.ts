@@ -9,7 +9,7 @@ class PictureController {
     }
     postPicture = async (req:Request , res:Response) =>{
        let picture= await pictureService.postPicture(req.body)
-       return(picture)
+       res.json(picture)
     }
     findAll = async (req: Request, res: Response) => {
         let picture = await this.pictureService.findByAll()

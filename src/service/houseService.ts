@@ -7,6 +7,8 @@ class HouseService {
   constructor() {
     this.Repository = AppDataSource.getRepository(House);
   }
+  
+
 
   createHouse = async (data) => {
     return await this.Repository.save(data);
@@ -16,12 +18,14 @@ class HouseService {
     return await this.Repository.update(id, data);
   };
   delete = async (id) => {
+
     return await this.Repository.delete(id);
   };
   findByAll = async () => {
     return await this.Repository.find({
       relations: {
         user: true,
+
       },
     });
   };
@@ -30,6 +34,7 @@ class HouseService {
       where: { id },
       relations: {
         user: true,
+        picture: true,
         order: true,
       },
     });
@@ -93,23 +98,6 @@ class HouseService {
       },
     });
   };
-
-// findByHouse = async (StartTime,EndTime)=>{
-//   const rentalStartTime = new Date(StartTime);
-//   const rentalEndTime = new Date(EndTime);
-//   // Thực hiện truy vấn
-//   const houseService = new HouseService(); // Tạo một thể hiện của HouseService
-//   return await houseService.Repository
-//   .createQueryBuilder("house")
-//   .leftJoinAndSelect("house.order", "order")
-//   .where("order.id IS NULL") // Chỉ lấy những nhà chưa có đơn thuê
-//   .andWhere("house.status = :status", { status: "chothue" })
-//   .andWhere("(:rentalStartTime BETWEEN order.checkIn AND order.checkOut OR :rentalEndTime BETWEEN order.checkIn AND order.checkOut OR order.checkIn BETWEEN :rentalStartTime AND :rentalEndTime OR order.checkOut BETWEEN :rentalStartTime AND :rentalEndTime)", {
-//     rentalStartTime,
-//     rentalEndTime,
-//   })
-//   .getMany();
-// }
 }
 
 export default new HouseService();
