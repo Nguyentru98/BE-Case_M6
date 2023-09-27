@@ -1,11 +1,13 @@
 import { Between, ILike, getConnection } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { Order } from "../entities/order";
+import moment from 'moment';
 
 class OrderService {
   private Repository;
   constructor() {
     this.Repository = AppDataSource.getRepository(Order);
+    
   }
 
   orderHouse = async (data) => {
@@ -70,6 +72,17 @@ class OrderService {
         house: true,
       },
     });
+  };
+
+  findByHouse = async (startTime, endTime) => {
+    return await this.Repository.query(`
+      SELECT house.*
+      FROM house
+      LEFT JOIN \`order\` ON house.id = \`order\`.houseId
+      AND ('${startTime}' <= \`order\`.checkOut and '${endTime}' >= \`order\`.checkIn)
+      WHERE \`order\`.houseId IS NULL;
+    `);
+
   };
 }
 

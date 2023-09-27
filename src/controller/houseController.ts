@@ -22,8 +22,8 @@ class HouseController {
       address,
       startPrice,
       endPrice,
-      checkOut,
-      checkIn,
+      startTime,
+      endTime,
     } = req.query;
     
     if (name) {
@@ -42,13 +42,8 @@ class HouseController {
       house = await this.houseService.topRooms(rentals);
     } 
     else if (startDate && endDate) {
-      console.log("time");
       house = await this.houseService.findByTime(startDate, endDate);
-    } 
-    else if (checkOut && checkIn) {
-      let data = await this.houseService.findHousetest(checkIn, checkOut);
-      res.json(data);
-    } 
+    }  
     else {
       console.log("all");
       house = await this.houseService.findByAll();
