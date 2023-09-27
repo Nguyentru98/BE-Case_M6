@@ -1,6 +1,7 @@
 import { Between, ILike } from "typeorm";
 import { AppDataSource } from "../data-source";
 import { House } from "../entities/house";
+import { Order } from "../entities/order";
 
 class HouseService {
   private Repository;
@@ -77,6 +78,42 @@ class HouseService {
       },
     });
   };
+  
+  findByConditions = async (query) => {
+    const {
+      homeName,
+      bath,
+      bad,
+      address,
+      startTime,
+      endTime,
+    } = query;
+
+    const queryBuilder = this.Repository.createQueryBuilder('H')
+      .leftJoinAndSelect("H.order", 'order')
+    if (homeName) {
+      queryBuilder.andWhere('H.name = :homeName', { homeName });
+    }
+    if (bath) {
+      queryBuilder.andWhere('H.bath = :bath', { bath });
+    }
+    if (bad) {
+      queryBuilder.andWhere('H.bad = :bad', { bad });
+    }
+    if (address) {
+      queryBuilder.andWhere('H.address = :address', { address });
+    }
+    if (startTime) {
+      queryBuilder.andWhere("order.checkOut >= :startTime", { startTime })
+    }
+    if (endTime) {
+      queryBuilder.andWhere("order.checkIn >= :endTime", { endTime })
+    }
+    console.log(await queryBuilder.getMany(), 'queryBuilder.getMany()');
+    
+    return await queryBuilder.getMany();
+  }
+
   findByBathroom = async (room) => {
     return await this.Repository.find({
       where: {

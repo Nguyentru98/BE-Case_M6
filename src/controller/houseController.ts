@@ -11,44 +11,17 @@ class HouseController {
     this.orderSevice = orderSevice;
   }
   findAll = async (req: Request, res: Response) => {
-    let house = "";
     let {
-      name,
-      status,
-      id,
-      rentals,
-      startDate,
-      endDate,
+      homeName,
+      bath,
+      bad,
       address,
-      startPrice,
-      endPrice,
       startTime,
       endTime,
     } = req.query;
-    
-    if (name) {
-      house = await this.houseService.findByName(name);
-    } 
-    else if (address) {
-      house = await this.houseService.findByAdress(address);
-    } 
-    else if (startPrice && endPrice) {
-      house = await this.houseService.findByPrice(startPrice, endPrice);
-    } 
-    else if (status && id) {
-      house = await this.houseService.findByStatus(status, id);
-    } 
-    else if (rentals) {
-      house = await this.houseService.topRooms(rentals);
-    } 
-    else if (startDate && endDate) {
-      house = await this.houseService.findByTime(startDate, endDate);
-    }  
-    else {
-      console.log("all");
-      house = await this.houseService.findByAll();
-    }
-    res.json(house);
+    console.log(homeName, address, bad, bath, startTime, endTime, 'data');
+    const houses = await this.houseService.findByConditions(req.query);
+    res.json(houses);
   };
   findById = async (req: Request, res: Response) => {
     let house = await houseService.findById(req.params.id);

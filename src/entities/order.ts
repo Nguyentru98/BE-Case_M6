@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import { User } from "./user";
 import { House } from "./house";
 @Entity()
@@ -12,6 +12,9 @@ export class Order {
 
     @Column({type: 'datetime'})
     checkIn: number;
+
+    @Column({type: 'varchar'})
+    houseId: number;
 
     @Column({type: 'datetime'})
     checkOut: number;
@@ -28,7 +31,7 @@ export class Order {
     @ManyToOne(() => User, (user) => user.id)
     user: User;
 
-    @ManyToOne(() => House, (house) => house.id)
-    house: House;
+    @OneToMany(() => House, (house) => house.order)
+    houses: House;
    
 }
