@@ -26,7 +26,7 @@ class HouseService {
     return await this.Repository.find({
       relations: {
         user: true,
-
+        order : true
       },
     });
   };
@@ -85,8 +85,8 @@ class HouseService {
       bath,
       bad,
       address,
-      startTime,
-      endTime,
+      // startTime,
+      // endTime,
     } = query;
 
     const queryBuilder = this.Repository.createQueryBuilder('H')
@@ -95,20 +95,20 @@ class HouseService {
       queryBuilder.andWhere('H.name = :homeName', { homeName });
     }
     if (bath) {
-      queryBuilder.andWhere('H.bath = :bath', { bath });
+      queryBuilder.andWhere('H.numberOfBathrooms = :bath', { bath });
     }
     if (bad) {
-      queryBuilder.andWhere('H.bad = :bad', { bad });
+      queryBuilder.andWhere('H.numberOfBedrooms = :bad', { bad });
     }
     if (address) {
       queryBuilder.andWhere('H.address = :address', { address });
     }
-    if (startTime) {
-      queryBuilder.andWhere("order.checkOut >= :startTime", { startTime })
-    }
-    if (endTime) {
-      queryBuilder.andWhere("order.checkIn >= :endTime", { endTime })
-    }
+    // if (startTime) {
+    //   queryBuilder.andWhere("order.checkOut >= :startTime", { startTime })
+    // }
+    // if (endTime) {
+    //   queryBuilder.andWhere("order.checkIn >= :endTime", { endTime })
+    // }
     console.log(await queryBuilder.getMany(), 'queryBuilder.getMany()');
     
     return await queryBuilder.getMany();

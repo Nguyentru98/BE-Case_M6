@@ -10,13 +10,13 @@ export class Order {
     @Column({type: 'datetime'})
     rentalTime: number;
 
-    @Column({type: 'datetime'})
+    @Column({type: 'date'})
     checkIn: number;
 
-    @Column({type: 'varchar'})
+    @Column({type: 'int'})
     houseId: number;
 
-    @Column({type: 'datetime'})
+    @Column({type: 'date'})
     checkOut: number;
 
     @Column({type: 'varchar'})

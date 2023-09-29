@@ -19,7 +19,7 @@ class HouseController {
       startTime,
       endTime,
     } = req.query;
-    console.log(homeName, address, bad, bath, startTime, endTime, 'data');
+    console.log(homeName, address, bad, bath,startTime,endTime,'data');
     const houses = await this.houseService.findByConditions(req.query);
     res.json(houses);
   };

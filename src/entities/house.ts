@@ -41,11 +41,12 @@ export class House {
     @ManyToOne(() => User, (user) => user.id)
     user: User;
 
-    @ManyToOne((type) => Order, (order) => order.houses)
+    @ManyToOne((type) => Order, (order) => order.id)
     @JoinColumn({ name: "id", referencedColumnName: "houseId"})
     order: Order
     
     @OneToMany(() => Picture, (picture) => picture.house)
     pictures: Picture[];
+    
 
 }
