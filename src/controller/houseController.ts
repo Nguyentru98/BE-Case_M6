@@ -18,8 +18,11 @@ class HouseController {
       address,
       startTime,
       endTime,
+      minPrice,
+      maxPrice
     } = req.query;
-    console.log(homeName, address, bad, bath,startTime,endTime,'data');
+
+    console.log(startTime,endTime,homeName, address, bad, bath,minPrice,maxPrice,'data req');
     const houses = await this.houseService.findByConditions(req.query);
     res.json(houses);
   };
