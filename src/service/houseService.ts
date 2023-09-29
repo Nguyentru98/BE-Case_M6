@@ -85,8 +85,8 @@ class HouseService {
       bath,
       bad,
       address,
-      // startTime,
-      // endTime,
+      startTime,
+      endTime,
     } = query;
 
     const queryBuilder = this.Repository.createQueryBuilder('H')
@@ -103,12 +103,15 @@ class HouseService {
     if (address) {
       queryBuilder.andWhere('H.address = :address', { address });
     }
-    // if (startTime) {
-    //   queryBuilder.andWhere("order.checkOut >= :startTime", { startTime })
-    // }
-    // if (endTime) {
-    //   queryBuilder.andWhere("order.checkIn >= :endTime", { endTime })
-    // }
+    if (startTime && endTime) {
+      return await this.Repository.query(`
+      SELECT house.*
+      FROM house
+      LEFT JOIN \`order\` ON house.id = \`order\`.houseId
+      AND ('${startTime}' <= \`order\`.checkOut and '${endTime}' >= \`order\`.checkIn)
+      WHERE \`order\`.houseId IS NULL;
+    `);
+    }
     console.log(await queryBuilder.getMany(), 'queryBuilder.getMany()');
     
     return await queryBuilder.getMany();
