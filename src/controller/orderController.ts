@@ -15,9 +15,6 @@ class OrderController {
         else if(req.query.startDate,req.query.endDate,req.query.id) {
             order= await orderSevice.findByTime(req.query.startDate,req.query.endDate,req.query.id)
         }
-        else if(req.query.startTime,req.query.endTime) {
-            order= await orderSevice.findByHouse(req.query.startTime,req.query.endTime)
-        }
         else{
             order = await this.orderSevice.findByAll()
         } 

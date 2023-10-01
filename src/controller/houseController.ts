@@ -22,6 +22,7 @@ class HouseController {
       maxPrice
     } = req.query;
 
+    
     console.log(startTime,endTime,homeName, address, bad, bath,minPrice,maxPrice,'data req');
     const houses = await this.houseService.findByConditions(req.query);
     res.json(houses);

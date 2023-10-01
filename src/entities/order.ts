@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
+import {Column, Entity, JoinColumn, ManyToOne, OneToMany, PrimaryGeneratedColumn} from "typeorm";
 import { User } from "./user";
 import { House } from "./house";
 @Entity()
@@ -31,7 +31,8 @@ export class Order {
     @ManyToOne(() => User, (user) => user.id)
     user: User;
 
-    @OneToMany(() => House, (house) => house.order)
+    @ManyToOne(() => House, (house) => house.orders)
+    @JoinColumn({ name: "houseId", referencedColumnName: "id"})
     houses: House;
    
 }

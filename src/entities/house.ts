@@ -41,9 +41,9 @@ export class House {
     @ManyToOne(() => User, (user) => user.id)
     user: User;
 
-    @ManyToOne((type) => Order, (order) => order.id)
+    @ManyToOne((type) => Order, (order) => order.houses)
     @JoinColumn({ name: "id", referencedColumnName: "houseId"})
-    order: Order
+    orders: Order
     
     @OneToMany(() => Picture, (picture) => picture.house)
     pictures: Picture[];

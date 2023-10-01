@@ -39,7 +39,7 @@ class OrderService {
       },
       relations: {
         user: true,
-        house: true,
+        houses: true,
       },
     });
   };
@@ -56,7 +56,7 @@ class OrderService {
       },
       relations: {
         user: true,
-        house: true,
+        houses: true,
       },
     });
   };
@@ -69,20 +69,9 @@ class OrderService {
         },
       },
       relations: {
-        house: true,
+        houses: true,
       },
     });
-  };
-
-  findByHouse = async (startTime, endTime) => {
-    return await this.Repository.query(`
-      SELECT house.*
-      FROM house
-      LEFT JOIN \`order\` ON house.id = \`order\`.houseId
-      AND ('${startTime}' <= \`order\`.checkOut and '${endTime}' >= \`order\`.checkIn)
-      WHERE \`order\`.houseId IS NULL;
-    `);
-
   };
 }
 
